@@ -2,6 +2,8 @@ import Gift from "@/components/Gift";
 import Link from "next/link";
 import { PiHandHeartBold } from "react-icons/pi";
 
+import { gifts } from "../../_data/data";
+
 const Homepage = () => {
   return (
     <>
@@ -25,8 +27,10 @@ const Homepage = () => {
             </Link>
           </div>
 
-          <div className="flex gap-5">
-            <Gift />
+          <div className="grid grid-cols-2 p-4 gap-4">
+            {gifts.map((gift) => (
+              <Gift key={gift.id} {...gift} />
+            ))}
           </div>
         </div>
       </section>
