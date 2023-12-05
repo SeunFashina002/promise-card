@@ -18,11 +18,11 @@ const Homepage = () => {
         <div className="w-full px-6 lg:w-2/4">
           <div className="flex justify-between">
             <div className="flex items-center gap-2 text-black">
-              <h2>Promise me</h2>
+              <h2 className="font-bold">Promise me</h2>
               <PiHandHeartBold />
             </div>
 
-            <Link href="/" className="text-primary">
+            <Link href="/" className="text-primary font-bold">
               See All
             </Link>
           </div>
