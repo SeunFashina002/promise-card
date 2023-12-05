@@ -25,3 +25,13 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.home {
+  background: linear-gradient(
+    91.67deg,
+    #c015a4 46.96%,
+    rgba(65, 21, 192, 0.84) 99.71%
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
