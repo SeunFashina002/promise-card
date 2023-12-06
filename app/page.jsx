@@ -1,11 +1,10 @@
 "use client";
 
-import Container from "@/components/container";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-const Home = () => {
+const Welcome = () => {
   const router = useRouter();
 
   const handleGetStarted = () => {
@@ -37,7 +36,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Welcome;
 
 // background: linear-gradient(91.67deg, #C015A4 46.96%, rgba(65, 21, 192, 0.84) 99.71%);
 // text-gradient-to-r from-["#C015A4"]
