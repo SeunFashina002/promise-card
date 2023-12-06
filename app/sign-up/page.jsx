@@ -1,26 +1,39 @@
-import Container from "@/components/container";
+"use client";
+import { useState } from "react";
 import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
 import { inter } from "../../font";
 import { FaUserCircle } from "react-icons/fa";
 import { IoIosEyeOff } from "react-icons/io";
+import { MdOutlineMail } from "react-icons/md";
+import { UserAuth } from "@/context/AuthContext";
 
 const Signup = () => {
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const { createUser } = UserAuth();
+
+  const handleSignUp = async () => {
+    try {
+      const userCredential = await createUser(email, password, username);
+      console.log(userCredential);
+      router.push(`/${username}`);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
   return (
-    <section className="py-6 px-6  h-screen flex flex-col justify-center md:items-center w-full bg-[#FFFDFA] lg:px-9">
+    <section className="py-6 px-6 flex flex-col justify-center md:items-center w-full bg-[#FFFDFA] lg:px-9">
       <h3
         className={`${inter.className} text-2xl font-semibold text-black mb-8`}
       >
         Get Started!
       </h3>
       <div className="flex flex-col justify-center md:w-1/3">
-        <div className="flex my-4 items-center">
-          <div className="border border-[#C2BABA] flex-1"></div>
-          <div className="flex flex-col items-center justify-center text-black">
-            <span>Or</span>
-            <span>Sign up with username</span>
-          </div>
-          <div className="border border-[#C2BABA] flex-1"></div>
-        </div>
         <div className="mt-4">
           <a
             href=""
@@ -41,17 +54,45 @@ const Signup = () => {
             <p className="text-black ml-4">Continue with google</p>
           </a>
         </div>
+
+        <div className="flex my-4 items-center">
+          <div className="border border-[#C2BABA] flex-1"></div>
+          <div className="flex flex-col items-center justify-center text-black">
+            <span>Or</span>
+            <span>Sign up with username</span>
+          </div>
+          <div className="border border-[#C2BABA] flex-1"></div>
+        </div>
         <div className="flex flex-col text-black">
+          {error && <p className="text-red-500 text-center">{error}</p>}
           <p className={`${inter.className} my-4`}>
             Username <span className="text-[#C015A4] text-lg">*</span>
           </p>
           <div className="flex border border-gray-300 rounded-2xl justify-between items-center">
             <input
               type="text"
+              value={username.trim()}
+              onChange={(e) => setUsername(e.target.value)}
+              required={true}
               className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
             />
 
             <FaUserCircle className="text-3xl  text-neutral-500 ml-1 mr-2" />
+          </div>
+
+          <p className={`${inter.className} my-4`}>
+            Email <span className="text-[#C015A4] text-lg">*</span>
+          </p>
+          <div className="flex border border-gray-300 rounded-2xl justify-between items-center">
+            <input
+              type="email"
+              required={true}
+              value={email.trim()}
+              onChange={(e) => setEmail(e.target.value)}
+              className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
+            />
+
+            <MdOutlineMail className="text-3xl  text-neutral-500 ml-1 mr-2" />
           </div>
           <p className={`${inter.className} my-4`}>
             Password <span className="text-[#C015A4] text-lg">*</span>
@@ -59,6 +100,9 @@ const Signup = () => {
           <div className="flex border border-gray-300 rounded-2xl justify-between items-center">
             <input
               type="password"
+              value={password.trim()}
+              required={true}
+              onChange={(e) => setPassword(e.target.value)}
               className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
             />
 
@@ -69,6 +113,7 @@ const Signup = () => {
           <Button
             className="bg-[#C015A4] text-white w-full "
             label={"Create Account"}
+            onClick={handleSignUp}
           />
           <p className="text-black text-lg text-center my-4">
             Already have an account?{" "}
@@ -83,18 +128,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-/*
-
-
-
-
-
-
-
-
-
-
-
-
-*/
