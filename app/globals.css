@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -20,12 +20,13 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
+  background: #fffdfa;
 }
 
 .home {
@@ -39,25 +40,25 @@ body {
 }
 
 .moneybg {
-  @apply bg-[#E4FFEF]
+  @apply bg-[#E4FFEF];
 }
 
 .chocolatebg {
-  @apply bg-[#FFECE4]
+  @apply bg-[#FFECE4];
 }
 
 .beachbg {
-  @apply bg-[#FFF9E4]
+  @apply bg-[#FFF9E4];
 }
 
 .shoebg {
-  @apply bg-[#E4F9FF]
+  @apply bg-[#E4F9FF];
 }
 
 .shirtbg {
-  @apply bg-[#F5FFE4]
+  @apply bg-[#F5FFE4];
 }
 
 .giftboxbg {
-  @apply bg-[#E4EFFF]
+  @apply bg-[#E4EFFF];
 }
