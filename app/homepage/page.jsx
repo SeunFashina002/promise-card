@@ -4,7 +4,7 @@ import { PiHandHeartBold } from "react-icons/pi";
 
 import { gifts } from "../../_data/data";
 
-const Homepage = () => {
+export const PromisePage = () => {
   return (
     <>
       <section className="  p-2 flex flex-col justify-center items-center bg-[#FFFDFA] h-screen">
