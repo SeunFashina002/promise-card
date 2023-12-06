@@ -1,6 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { auth, db } from "@/firebase/config";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
 
 import {
   createUserWithEmailAndPassword,
@@ -17,38 +17,49 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const createUser = (email, password, username, avatar) => {
-    const usernameExists = checkUsernameExists(username);
-    if (usernameExists) {
-      console.log("username has already been taken");
-      return;
-    }
+  const createUser = async (email, password, username) => {
 
-    return createUserWithEmailAndPassword(auth, email, password).then(
-      ({ user }) => {
-        updateProfile(user, {
-          displayName: username,
-          photoURL: avatar,
-          bio: "",
-        })
-          .catch(console.log)
-          .finally(() => {
-            console.log("final block executed");
-            // setLoading(false)
-          });
-      }
-    );
+    const usernameUnique = await checkUsernameAvailability(username)
+    console.log("is usernam unique", usernameUnique);
+    if (!usernameUnique) {
+      throw new Error("username already taken")
+    }
+    try {
+      
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      
+      await updateProfile(user, { displayName: username });
+
+      const userDocRef = await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        username: username,
+        bio: "",
+        avatar:"../home.svg"
+      });
+
+      setUser({
+        uid: user.uid,
+        email: user.email,
+        username: user.username,
+        bio: "",
+        avatar:"",
+      });
+
+      return "user created successfully";
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
   };
 
-  // check if username exists
-  async function checkUsernameExists(username) {
-    const userCollection = collection(db, "users");
-    const q = query(userCollection, where("username", "===", username));
-    const querySnapshot = await getDocs(q);
-
-    return querySnapshot.empty;
-  }
-
+  
+const checkUsernameAvailability = async (username) => {
+  const querySnapshot = await getDocs(
+    query(collection(db, "users"), where("username", "==", username))
+  );
+  return querySnapshot.empty;
+};
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -69,12 +80,16 @@ export const AuthContextProvider = ({ children }) => {
     return () => unsubscribe();
   }, [user]);
 
+  const contextValue = {
+    user,
+    createUser,
+    googleSignIn,
+    logout,
+    login,
+  };
+
   return (
-    <AuthContext.Provider
-      value={{ user, googleSignIn, logout, login, createUser }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 
