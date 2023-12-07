@@ -49,7 +49,7 @@ export const Home = ({ user, username }) => {
 
   return (
     <>
-      <section className="  p-2 flex flex-col justify-center items-center bg-[#FFFDFA] h-screen">
+      <section className="  p-2 flex flex-col justify-center items-center bg-[#FFFDFA] h-4/5">
         <div className="w-full px-6 lg:w-2/4">
           {user && gifts.length > 0 && (
             <div className="flex justify-between">

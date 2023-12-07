@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Navigation = () => {
   return (
-    <div className="flex justify-around bg-[#F5F5F5] text-black w-full ">
+    <div className="flex justify-around bg-[#F5F5F5] text-black w-full absolute bottom-0 ">
       <Link
         href="/"
         className="flex flex-col items-center p-4 text-primary font-bold"
