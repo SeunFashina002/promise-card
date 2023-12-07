@@ -18,33 +18,34 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const createUser = async (email, password, username) => {
-
-    const usernameUnique = await checkUsernameAvailability(username)
+    const usernameUnique = await checkUsernameAvailability(username);
     console.log("is usernam unique", usernameUnique);
     if (!usernameUnique) {
-      throw new Error("username already taken")
+      throw new Error("username already taken");
     }
     try {
-      
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
 
-      
       await updateProfile(user, { displayName: username });
 
       const userDocRef = await addDoc(collection(db, "users"), {
         uid: user.uid,
         username: username,
         bio: "",
-        avatar:"../home.svg"
+        avatar: "",
       });
 
       setUser({
         uid: user.uid,
         email: user.email,
-        username: user.username,
+        username: username,
         bio: "",
-        avatar:"",
+        avatar: "",
       });
 
       return "user created successfully";
@@ -53,13 +54,12 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  
-const checkUsernameAvailability = async (username) => {
-  const querySnapshot = await getDocs(
-    query(collection(db, "users"), where("username", "==", username))
-  );
-  return querySnapshot.empty;
-};
+  const checkUsernameAvailability = async (username) => {
+    const querySnapshot = await getDocs(
+      query(collection(db, "users"), where("username", "==", username))
+    );
+    return querySnapshot.empty;
+  };
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -68,9 +68,48 @@ const checkUsernameAvailability = async (username) => {
     signOut(auth);
   };
 
-  const googleSignIn = () => {
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
+  const googleSignIn = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // extract username from gmail
+      const emailParts = user.email.split("@");
+      const extractedUsername = emailParts[0];
+
+      // check if extracted username is unique
+      const usernameUnique = await checkUsernameAvailability(extractedUsername);
+      if (!usernameUnique) {
+        const usernameSuffix = generateUniqueSuffix();
+        const newUsername = `${extractedUsername}_${usernameSuffix}`;
+        await updateProfile(user, { displayName: newUsername });
+
+        await addDoc(collection(db, "users"), {
+          uid: user.uid,
+          username: newUsername,
+          bio: "",
+          avatar: "",
+        });
+      } else {
+        // update the displayName even if it is unique
+        await updateProfile(user, { displayName: extractedUsername });
+        await addDoc(collection(db, "users"), {
+          uid: user.uid,
+          username: extractedUsername,
+          bio: "",
+          avatar: "",
+        });
+      }
+
+      return user;
+    } catch (error) {
+      console.error("google sign in error", error);
+    }
+  };
+
+  const generateUniqueSuffix = () => {
+    return Math.random().toString(36).substring(2, 9);
   };
 
   useEffect(() => {

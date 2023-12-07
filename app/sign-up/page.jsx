@@ -7,6 +7,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoIosEyeOff } from "react-icons/io";
 import { MdOutlineMail } from "react-icons/md";
 import { UserAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
 const Signup = () => {
   const router = useRouter();
@@ -15,13 +16,24 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const { createUser } = UserAuth();
+  const { createUser, googleSignIn } = UserAuth();
 
   const handleSignUp = async () => {
     try {
-      const userCredential = await createUser(email, password, username);
-      console.log(userCredential);
+      await createUser(email, password, username);
+      setUsername("");
+      setEmail("");
+      setPassword("");
       router.push(`/${username}`);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const user = await googleSignIn();
+      router.push(`/${user.displayName}`);
     } catch (error) {
       setError(error.message);
     }
@@ -35,9 +47,9 @@ const Signup = () => {
       </h3>
       <div className="flex flex-col justify-center md:w-1/3">
         <div className="mt-4">
-          <a
-            href=""
-            className="flex border border-gray-300 rounded-full py-4 px-3 items-center justify-center"
+          <button
+            // onClick={handleGoogleSignIn}
+            className="flex border border-gray-300 rounded-full py-4 px-3 items-center justify-center w-full"
           >
             <svg
               width="20"
@@ -52,7 +64,7 @@ const Signup = () => {
               />
             </svg>
             <p className="text-black ml-4">Continue with google</p>
-          </a>
+          </button>
         </div>
 
         <div className="flex my-4 items-center">
@@ -117,9 +129,9 @@ const Signup = () => {
           />
           <p className="text-black text-lg text-center my-4">
             Already have an account?{" "}
-            <a href="/sign-in" className="text-xl text-[#C015A4] font-medium">
+            <Link href="/sign-in" className="text-xl text-[#C015A4] font-medium">
               Login
-            </a>
+            </Link>
           </p>
         </div>
       </div>

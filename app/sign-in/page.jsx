@@ -1,10 +1,41 @@
-import Container from "@/components/container";
+"use client";
+import { useState } from "react";
+import { UserAuth } from "@/context/AuthContext";
 import Button from "@/components/Button";
 import { inter } from "../../font";
 import { FaUserCircle } from "react-icons/fa";
 import { IoIosEyeOff } from "react-icons/io";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Signin = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const { login, user, googleSignIn } = UserAuth();
+
+  const handleSignin = async () => {
+    try {
+      await login(email, password);
+      setEmail("");
+      setPassword("");
+      router.push(`/${user.displayName}`);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const user = await googleSignIn();
+      router.push(`/${user.displayName}`);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <section className="py-6 px-6  h-screen flex flex-col justify-center md:items-center w-full bg-[#FFFDFA] lg:px-9">
       <h3
@@ -13,18 +44,10 @@ const Signin = () => {
         Welcome Back!
       </h3>
       <div className="flex flex-col justify-center md:w-1/3">
-        <div className="flex my-4 items-center">
-          <div className="border border-[#C2BABA] flex-1"></div>
-          <div className="flex flex-col items-center justify-center text-black">
-            <span>Or</span>
-            <span>Sign in with username</span>
-          </div>
-          <div className="border border-[#C2BABA] flex-1"></div>
-        </div>
         <div className="mt-4">
-          <a
-            href=""
-            className="flex border border-gray-300 rounded-full py-4 px-3 items-center justify-center"
+          <button
+            onClick={handleGoogleSignIn}
+            className="flex border border-gray-300 rounded-full py-4 px-3 items-center justify-center w-full"
           >
             <svg
               width="20"
@@ -39,15 +62,27 @@ const Signin = () => {
               />
             </svg>
             <p className="text-black ml-4">Continue with google</p>
-          </a>
+          </button>
+        </div>
+        <div className="flex my-4 items-center">
+          <div className="border border-[#C2BABA] flex-1"></div>
+          <div className="flex flex-col items-center justify-center text-black">
+            <span>Or</span>
+            <span>Sign in with username</span>
+          </div>
+          <div className="border border-[#C2BABA] flex-1"></div>
         </div>
         <div className="flex flex-col text-black">
+          {error && <p className="text-red-500 text-center">{error}</p>}
           <p className={`${inter.className} my-4`}>
-            Username <span className="text-[#C015A4] text-lg">*</span>
+            Email <span className="text-[#C015A4] text-lg">*</span>
           </p>
           <div className="flex border border-gray-300 rounded-2xl justify-between items-center">
             <input
-              type="text"
+              type="email"
+              required={true}
+              value={email.trim()}
+              onChange={(e) => setEmail(e.target.value)}
               className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
             />
 
@@ -59,6 +94,9 @@ const Signin = () => {
           <div className="flex border border-gray-300 rounded-2xl justify-between items-center">
             <input
               type="password"
+              value={password.trim()}
+              required={true}
+              onChange={(e) => setPassword(e.target.value)}
               className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
             />
 
@@ -69,12 +107,16 @@ const Signin = () => {
           <Button
             className="bg-[#C015A4] text-white w-full "
             label={"Sign in"}
+            // onClick={handleSignin}
           />
           <p className="text-black text-lg text-center my-4">
             Don't have an account?{" "}
-            <a href="/sign-up" className="text-xl text-[#C015A4] font-medium">
+            <Link
+              href="/sign-up"
+              className="text-xl text-[#C015A4] font-medium"
+            >
               Signup
-            </a>
+            </Link>
           </p>
         </div>
       </div>
