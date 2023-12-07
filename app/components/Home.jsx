@@ -6,6 +6,7 @@ import EmptyGift from "./EmptyGift";
 import { PromisePage } from "./PromisePage";
 import { useRouter } from "next/navigation";
 import { getGiftsForUser, getUserIdByUsername } from "@/utils/db_utils";
+import Navigation from "./Navigation";
 
 export const Home = ({ user, username }) => {
   const router = useRouter();
@@ -73,6 +74,7 @@ export const Home = ({ user, username }) => {
           )}
         </div>
       </section>
+      <Navigation />
     </>
   );
 };

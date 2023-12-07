@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PiHandHeartBold } from "react-icons/pi";
 
 import { gifts } from "../../_data/data";
+import Navigation from "@/components/Navigation";
 
 export const PromisePage = () => {
   return (
