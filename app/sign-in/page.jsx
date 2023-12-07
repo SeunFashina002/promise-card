@@ -18,7 +18,9 @@ const Signin = () => {
 
   const handleSignin = async () => {
     try {
-      await login(email, password);
+      const { user } = await login(email, password);
+      
+      console.log(user.displayName)
       setEmail("");
       setPassword("");
       router.push(`/${user.displayName}`);
@@ -46,7 +48,7 @@ const Signin = () => {
       <div className="flex flex-col justify-center md:w-1/3">
         <div className="mt-4">
           <button
-            onClick={handleGoogleSignIn}
+            // onClick={handleGoogleSignIn}
             className="flex border border-gray-300 rounded-full py-4 px-3 items-center justify-center w-full"
           >
             <svg
