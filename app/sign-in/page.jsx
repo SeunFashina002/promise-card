@@ -107,7 +107,7 @@ const Signin = () => {
           <Button
             className="bg-[#C015A4] text-white w-full "
             label={"Sign in"}
-            // onClick={handleSignin}
+            onClick={handleSignin}
           />
           <p className="text-black text-lg text-center my-4">
             Don't have an account?{" "}
