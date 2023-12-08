@@ -46,7 +46,7 @@ const Signin = () => {
       <div className="flex flex-col justify-center md:w-1/3">
         <div className="mt-4">
           <button
-            onClick={handleGoogleSignIn}
+            // onClick={handleGoogleSignIn}
             className="flex border border-gray-300 rounded-full py-4 px-3 items-center justify-center w-full"
           >
             <svg
@@ -107,7 +107,7 @@ const Signin = () => {
           <Button
             className="bg-[#C015A4] text-white w-full "
             label={"Sign in"}
-            // onClick={handleSignin}
+            onClick={handleSignin}
           />
           <p className="text-black text-lg text-center my-4">
             Don't have an account?{" "}
