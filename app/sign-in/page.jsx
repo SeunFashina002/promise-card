@@ -18,7 +18,9 @@ const Signin = () => {
 
   const handleSignin = async () => {
     try {
-      await login(email, password);
+      const { user } = await login(email, password);
+      
+      console.log(user.displayName)
       setEmail("");
       setPassword("");
       router.push(`/${user.displayName}`);
