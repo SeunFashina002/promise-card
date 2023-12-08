@@ -9,7 +9,7 @@ const Addgift = () => {
   return (
     <>
       <div>
-        <div className="flex justify-around p-2">
+        <div className="flex justify-between p-10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -32,8 +32,10 @@ const Addgift = () => {
           </Link>
         </div>
 
-        <div className=" md:w-2/4 p-4 mx-auto">
-          <h1 className="text-black font-bold">Select gift item</h1>
+        <div className=" md:w-2/4 px-6 mx-auto">
+          <h1 className="text-black text-lg ml-4 font-bold pb-4">
+            Select gift item
+          </h1>
           {gifts.map((gift) => (
             <GiftList
               id={gift.id}
