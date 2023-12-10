@@ -1,6 +1,14 @@
+"use client";
 import Button from "@/components/Button";
+import Navigation from "@/components/Navigation";
+import { useRouter } from "next/navigation";
 
 const Giftadded = () => {
+  const router = useRouter();
+
+  function handleClick() {
+    router.push("/homepage");
+  }
   return (
     <>
       <section className="md:w-3/4  mx-auto p-6 md:p-16 h-screen flex flex-col justify-center ">
@@ -9,6 +17,7 @@ const Giftadded = () => {
           <Button
             className="bg-[#C015A4] text-white  p-4 text-center border rounded-full"
             label="Go to home"
+            onClick={handleClick}
           />
         </div>
 
@@ -28,6 +37,7 @@ const Giftadded = () => {
           </button>
         </div>
       </section>
+      <Navigation />
     </>
   );
 };

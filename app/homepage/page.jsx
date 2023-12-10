@@ -39,4 +39,4 @@ export const PromisePage = () => {
   );
 };
 
-export default Homepage;
+export default PromisePage;

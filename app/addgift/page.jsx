@@ -14,6 +14,10 @@ const Addgift = () => {
     router.push("/addgift/giftadded");
   };
 
+  const addgift = () => {
+    router.push("/customgift");
+  };
+
   return (
     <>
       <div>
@@ -64,6 +68,7 @@ const Addgift = () => {
             <Button
               className="bg-[#F7F3F3] text-black w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full"
               label="Add custom gift"
+              onClick={addgift}
             />
           </div>
         </div>
