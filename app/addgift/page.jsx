@@ -36,14 +36,17 @@ const Addgift = () => {
           <h1 className="text-black text-lg ml-4 font-bold pb-4">
             Select gift item
           </h1>
-          {gifts.map((gift) => (
-            <GiftList
-              id={gift.id}
-              title={gift.title}
-              img={gift.img}
-              bg={gift.bg}
-            />
-          ))}
+          {gifts.map((gift) => {
+            return (
+              <GiftList
+                key={gift.id}
+                id={gift.id}
+                title={gift.title}
+                img={gift.img}
+                bg={gift.bg}
+              />
+            );
+          })}
           <div className="flex w-full justify-around">
             <Button
               className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full"
