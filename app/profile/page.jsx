@@ -15,7 +15,7 @@ const Profile = () => {
         <div className="flex justify-between p-4">
           <h1 className="text-black text-lg font-bold">My profile</h1>
           <Link
-            href="/promisedgifts"
+            href="/profile/promisedgifts"
             className="text-primary text-lg font-bold"
           >
             Promised Gifts
