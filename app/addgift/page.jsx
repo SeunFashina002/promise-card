@@ -2,10 +2,17 @@ import Link from "next/link";
 import { gifts } from "../../_data/data";
 import GiftList from "@/components/GiftList";
 import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
 
 const { default: Navigation } = require("@/components/Navigation");
 
 const Addgift = () => {
+  const router = useRouter;
+
+  const handleClick = () => {
+    router.push("/addgift/giftadded");
+  };
+
   return (
     <>
       <div>
@@ -51,6 +58,7 @@ const Addgift = () => {
             <Button
               className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full"
               label="Add gift"
+              onClick={handleClick}
             />
             <Button
               className="bg-[#F7F3F3] text-black w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full"
