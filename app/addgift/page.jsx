@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { gifts } from "../../_data/data";
 import GiftList from "@/components/GiftList";
@@ -7,7 +8,7 @@ import { useRouter } from "next/navigation";
 const { default: Navigation } = require("@/components/Navigation");
 
 const Addgift = () => {
-  const router = useRouter;
+  const router = useRouter();
 
   const handleClick = () => {
     router.push("/addgift/giftadded");
@@ -54,7 +55,7 @@ const Addgift = () => {
               />
             );
           })}
-          <div className="flex w-full justify-around">
+          <div className="flex w-full justify-around py-4">
             <Button
               className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full"
               label="Add gift"
