@@ -3,8 +3,49 @@
 import Button from "@/components/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { UserAuth } from "@/context/AuthContext";
+import { collection, getDocs, where, query } from 'firebase/firestore';
+import { db } from "@/firebase/config";
+import { useState, useEffect } from 'react';
+
 const Profile = () => {
   const router = useRouter();
+  const { user } = UserAuth();
+  if (!user) {
+    router.push('/sign-in')
+  }
+
+    const [userProfile, setUserProfile] = useState(null);
+
+  useEffect(() => {
+    
+    const { displayName } = user;
+    console.log("here", displayName)
+
+    // If the username exists, fetch the user profile
+    if (displayName) {
+      const fetchUserProfile = async () => {
+        try {
+          // Query Firestore to get the user profile with the given username
+          const q = query(collection(db, 'users'), where('username', '==', displayName));
+          const querySnapshot = await getDocs(q);
+
+          if (!querySnapshot.empty) {
+            // If the user profile exists, set it in the state
+            setUserProfile(querySnapshot.docs[0].data());
+          } else {
+            // Handle case when the user profile is not found
+            console.error('User profile not found.');
+          }
+        } catch (error) {
+          console.error('Error fetching user profile:', error);
+        }
+      };
+
+      fetchUserProfile();
+    }
+  }, [user]); // This will run whenever the route parameters change
+
 
   const handleClick = () => {
     router.push("/profile/updateprofile");
@@ -25,23 +66,22 @@ const Profile = () => {
         <div className="flex gap-2 items-center p-6">
           <div className="w-16 h-16 bg-black rounded-full border-primary border-4"></div>
           <div>
-            <h1 className="text-black text-xl font-bold">Fola J</h1>
+            <h1 className="text-black text-xl font-bold">
+              {userProfile.username}
+            </h1>
           </div>
         </div>
 
         <div className="p-6 border rounded-lg my-8 bg-[#EDEFEE]">
           <p className="text-black">
-            Hey, it's Fola! ... your promise could be the sweet touch i need
-            right now. Imagine your promise as a little gift, bringing us closer
-            to making my dream come true. Let's unwrap the joy of promises
-            together. Your commitment means the world! 🎁✨
+            {userProfile.bio}
           </p>
         </div>
 
         <div className="py-4">
           <input
             type="text"
-            placeholder="https://promisecard.djin"
+            placeholder={`https://promisecard.vercel.app/${user.displayName}`}
             className="p-4 bg-[#F7F3F3] border rounded-lg w-full mb-4"
           />
           <Button
@@ -69,3 +109,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
