@@ -3,18 +3,26 @@
 import Image from "next/image";
 import { useState } from "react";
 
-const GiftList = ({ id, title, img, bg }) => {
+const GiftList = ({ id, title, img, bg, gift, setSelectedGifts }) => {
   const [clickedGift, setclickedGift] = useState(false);
 
-  function selectedGift() {
+  function toggleGiftSelection(gift) {
     setclickedGift(!clickedGift);
+    setSelectedGifts((prevSelectedGifts) => {
+      const isSelected = prevSelectedGifts.includes(gift);
+      if (isSelected) {
+        return prevSelectedGifts.filter((selected) => selected !== gift);
+      } else {
+        return [...prevSelectedGifts, gift];
+      }
+    });
   }
 
   return (
     <>
       <div
         key={id}
-        onClick={selectedGift}
+        onClick={() => toggleGiftSelection(gift)}
         className={`p-4 gap-4 flex items-center border-t-2 cursor-pointer ${
           clickedGift ? bg : ""
         }`}

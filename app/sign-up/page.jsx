@@ -46,7 +46,7 @@ const Signup = () => {
         Get Started!
       </h3>
       <div className="flex flex-col justify-center md:w-1/3">
-        <div className="mt-4">
+        <div className="mt-4 hidden">
           <button
             // onClick={handleGoogleSignIn}
             className="flex border border-gray-300 rounded-full py-4 px-3 items-center justify-center w-full"
@@ -67,7 +67,7 @@ const Signup = () => {
           </button>
         </div>
 
-        <div className="flex my-4 items-center">
+        <div className="flex my-4 items-center hidden">
           <div className="border border-[#C2BABA] flex-1"></div>
           <div className="flex flex-col items-center justify-center text-black">
             <span>Or</span>
