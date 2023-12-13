@@ -1,12 +1,48 @@
+"use client";
 import Link from "next/link";
 import Button from "@/components/Button";
 import Navigation from "@/components/Navigation";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "@/firebase/config";
+import { UserAuth } from "@/context/AuthContext";
+
 const Customgift = () => {
+  const [giftName, setGiftName] = useState("");
+  const router = useRouter();
+  const { user } = UserAuth();
+
+  if (!user) {
+    router.push('/sign-in')
+  }
+
+  const addGift = async (e) => {
+    e.preventDefault();
+    
+    try {
+      if (!giftName) {
+        alert("please select enter a gift name");
+        return;
+      }
+      await addDoc(collection(db, "gifts"), {
+        name: giftName,
+        image: "",
+        user: user.uid,
+      });
+
+      router.push("/addgift/giftadded");
+    } catch (error) {
+      console.error("Error adding gift to the database: ", error);
+    }
+    
+  };
+
   return (
     <>
       <section className=" p-4 md:w-2/4 mx-auto">
         <div className="flex justify-between p-10">
-          <svg
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -21,7 +57,7 @@ const Customgift = () => {
               stroke-linecap="round"
               stroke-linejoin="round"
             />
-          </svg>
+          </svg> */}
 
           <Link href="/" className="text-primary font-bold ">
             Cancel
@@ -40,16 +76,23 @@ const Customgift = () => {
             <label htmlFor="" className="text-black pb-4">
               Gift name <span className="text-primary font-bold">*</span>
             </label>
-            <input type="text" className="bg-[#F7F3F3] border rounded-lg p-4" />
+            <input
+              type="text"
+              required={true}
+              value={giftName}
+              onChange={(e) => setGiftName(e.target.value)}
+              className="bg-[#F7F3F3] border rounded-lg p-4 text-black"
+            />
             <input
               type="file"
               name=""
               id=""
-              className="file:bg-[#C015A40D]  my-4 text-black file:border-3 file:border-primary file:rounded-lg file:p-8 file:border-dashed  "
+              className="file:bg-[#C015A40D]  my-4 text-black file:border-3 file:border-primary file:rounded-lg file:p-8 file:border-dashed hidden "
             />
             <Button
               className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full mt-11"
               label="Add gift"
+              onClick={(e) => addGift(e)}
             />
           </form>
         </div>

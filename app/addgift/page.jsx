@@ -4,14 +4,42 @@ import { gifts } from "../../_data/data";
 import GiftList from "@/components/GiftList";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
+import { collection, addDoc } from "firebase/firestore";
+import { UserAuth } from "@/context/AuthContext";
+import { useState } from "react";
+import { db } from "@/firebase/config";
+
 
 const { default: Navigation } = require("@/components/Navigation");
 
 const Addgift = () => {
+  const { user } = UserAuth();
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push("/addgift/giftadded");
+  if (!user) {
+    router.push('/sign-in')
+  }
+
+  const [selectedGifts, setSelectedGifts] = useState([]);
+  console.log(selectedGifts)
+
+  // handle adding selected gift to the database
+  const addSelectedGifts = async () => {
+    for (const gift of selectedGifts) {
+      try {
+        await addDoc(collection(db, "gifts"), {
+          name: gift.title,
+          image: gift.img,
+          user: user.uid,
+        });
+        console.log("gift added");
+        router.push("/addgift/giftadded");
+      } catch (error) {
+        console.log("error adding gift", error)
+      }
+    }
+
+    setSelectedGifts([])
   };
 
   const addgift = () => {
@@ -56,6 +84,8 @@ const Addgift = () => {
                 title={gift.title}
                 img={gift.img}
                 bg={gift.bg}
+                gift={gift}
+                setSelectedGifts={setSelectedGifts}
               />
             );
           })}
@@ -63,7 +93,7 @@ const Addgift = () => {
             <Button
               className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full"
               label="Add gift"
-              onClick={handleClick}
+              onClick={addSelectedGifts}
             />
             <Button
               className="bg-[#F7F3F3] text-black w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full"
