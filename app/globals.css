@@ -62,3 +62,10 @@ body {
 .giftboxbg {
   @apply bg-[#E4EFFF];
 }
+
+
+.gradient-border {
+  border-radius: 64px;
+  border: 2px solid var(--LINEAR, #C015A4);
+  /* background: url(<path-to-image>), lightgray 50% / cover no-repeat, #D9D9D9; */
+}

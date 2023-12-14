@@ -7,9 +7,9 @@ import { UserAuth } from "@/context/AuthContext";
 const Giftadded = () => {
   const router = useRouter();
   const { user } = UserAuth();
-  if (!user) {
-    router.push('/sign-in')
-  }
+  // if (!user) {
+  //   router.push('/sign-in')
+  // }
 
   function handleClick() {
     router.push("/homepage");
@@ -34,7 +34,7 @@ const Giftadded = () => {
 
           <input
             type="text"
-            placeholder={`https://promisecard.vercel.app/${user.displayName}`}
+            // placeholder={`https://promisecard.vercel.app/${user.displayName}`}
             className="p-2 bg-[#F7F3F3] border rounded-s-lg text-sm"
           />
           <button className="text-primary p-2 bg-[#F7F3F3] border rounded-e-lg text-sm">
