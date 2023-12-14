@@ -34,7 +34,7 @@ const Promisemade = () => {
               height={130}
               priority
             />
-            <div className="flex gap-2 py-8 flex-wrap">
+            <div className="flex gap-2 py-44 flex-wrap">
               <p className="text-black">Create your own promise card</p>
               <span>
                 <Link href="/" className="text-primary">
