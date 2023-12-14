@@ -1,13 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const Gift = ({ id, name, image, bg = "moneybg" }) => {
+  const [selectedGift, setselectedGift] = useState(false);
+
+  const handleSelection = () => {
+    setselectedGift(!selectedGift);
+  };
   return (
     <>
       <Link
-        href="/"
+        href="#"
         key={id}
-        className={`${bg} w-full rounded-lg p-6 flex flex-col items-center justify-center relative`}
+        className={
+          selectedGift
+            ? `${bg} w-full rounded-lg p-6 flex flex-col items-center justify-center relative border-2 border-primary`
+            : `${bg} w-full rounded-lg p-6 flex flex-col items-center justify-center relative `
+        }
+        onClick={handleSelection}
       >
         <Image
           src="/images/image 9.png"
