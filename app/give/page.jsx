@@ -7,7 +7,7 @@ import Button from "@/components/Button";
 const Give = () => {
   return (
     <>
-      <section className="md:w-1/4 p-4 mx-auto">
+      <section className="md:w-2/4 p-4 mx-auto">
         <div className="pb-14">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +125,7 @@ const Give = () => {
                 <Gift key={gift.id} {...gift} />
               ))}
               <Link
-                href="/"
+                href="/addgift"
                 className="text-black bg-[#EDEFEE] flex items-center justify-center flex-col rounded-lg"
               >
                 <div>
@@ -162,12 +162,26 @@ const Give = () => {
               Giver's Name
             </label>
             <div className="flex gap-2  p-4 bg-[#F7F3F3] border rounded-lg mt-2">
-              <select name="" id="" className="text-black">
-                <option value="">NGN</option>
-                <option value="">USD</option>
-                <option value="">EUR</option>
-                <option value="">CAD</option>
-                <option value="">GBP</option>
+              <select
+                name=""
+                id=""
+                className="text-black bg-[#E4E2E4] py-2 px-4 rounded-lg  outline-none"
+              >
+                <option className="text-sm" value="">
+                  NGN
+                </option>
+                <option className="text-sm" value="">
+                  USD
+                </option>
+                <option className="text-sm" value="">
+                  EUR
+                </option>
+                <option className="text-sm" value="">
+                  CAD
+                </option>
+                <option className="text-sm" value="">
+                  GBP
+                </option>
               </select>
               <input
                 type="text"

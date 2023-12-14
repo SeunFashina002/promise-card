@@ -70,6 +70,8 @@ body {
   /* background: url(<path-to-image>), lightgray 50% / cover no-repeat, #D9D9D9; */
 }
 
+
+
 /* Styles for Toggle Switch */
 #toggle:checked+.toggle__line {
   background-color: #C015A4;
@@ -86,4 +88,13 @@ body {
 
 .toggle__dot {
   transition: transform 0.3s;
+}
+
+
+.bg-gradient {
+  background-image: radial-gradient(#DD5318, #ECBB3A);
+}
+
+.text-gradient {
+  color: #C015A4;
 }
