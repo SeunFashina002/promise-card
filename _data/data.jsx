@@ -36,3 +36,51 @@ export const gifts = [
     bg: "giftboxbg",
   },
 ];
+
+export const promisedgifts = [
+  {
+    id: 1,
+    title: "GiftBox",
+    img: "/images/image 9.png",
+    bg: "giftboxbg",
+    promisedby: "Sarah",
+    promiseditem: "Nike",
+    date: "Promise  due date 04, Dec, 2023",
+  },
+  {
+    id: 2,
+    title: "GiftBox",
+    img: "/images/image 9.png",
+    bg: "giftboxbg",
+    promisedby: "Sam",
+    promiseditem: "Nike",
+    date: "Promise  due date 04, Dec, 2023",
+  },
+  {
+    id: 3,
+    title: "GiftBox",
+    img: "/images/image 9.png",
+    bg: "giftboxbg",
+    promisedby: "Seun",
+    promiseditem: "N200,000",
+    date: "Promise  due date 04, Dec, 2023",
+  },
+  {
+    id: 3,
+    title: "GiftBox",
+    img: "/images/image 9.png",
+    bg: "giftboxbg",
+    promisedby: "Bake.Design",
+    promiseditem: "N200,000",
+    date: "Promise  due date 04, Dec, 2023",
+  },
+  {
+    id: 4,
+    title: "GiftBox",
+    img: "/images/image 9.png",
+    bg: "giftboxbg",
+    promisedby: "Anon",
+    promiseditem: "Macbook M2",
+    date: "Promise  due date 04, Dec, 2023",
+  },
+];
