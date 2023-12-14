@@ -32,7 +32,7 @@ const Give = () => {
             <label htmlFor="" className="text-black text-xl font-semibold">
               Giver's Name
             </label>
-            <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-lg mt-2">
+            <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl mt-2">
               <input
                 type="text"
                 placeholder="Wetin be your name boss"
@@ -65,7 +65,7 @@ const Give = () => {
             <label htmlFor="" className="text-black text-xl font-semibold">
               Date
             </label>
-            <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-lg mt-2">
+            <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl mt-2">
               <input
                 type="date"
                 placeholder="Wetin be your name boss"

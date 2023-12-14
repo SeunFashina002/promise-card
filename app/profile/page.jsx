@@ -88,7 +88,7 @@ const Profile = () => {
           <input
             type="text"
             // placeholder={`https://promisecard.vercel.app/${user.displayName}`}
-            className="p-4 bg-[#F7F3F3] border rounded-lg w-full mb-4"
+            className="p-4 bg-[#F7F3F3] border rounded-2xl w-full mb-4"
           />
           <Button
             className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full"

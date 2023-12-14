@@ -28,7 +28,7 @@ const Updateprofile = () => {
               <label htmlFor="" className="text-black">
                 Username
               </label>
-              <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-lg">
+              <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl">
                 <input
                   type="text"
                   placeholder="Fola J"

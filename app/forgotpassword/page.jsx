@@ -12,7 +12,7 @@ const Forgotpassword = () => {
           <label htmlFor="" className="text-black text-lg font-lg">
             Username
           </label>
-          <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-lg mt-2">
+          <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl mt-2">
             <input
               type="text"
               placeholder="Enter your username"
@@ -46,7 +46,7 @@ const Forgotpassword = () => {
           <label htmlFor="" className="text-black text-lg font-lg">
             Email
           </label>
-          <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-lg mt-2">
+          <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl mt-2">
             <input
               type="Email"
               placeholder="Enter your Email address"

@@ -21,7 +21,7 @@ const Changepassword = () => {
           <label htmlFor="" className="text-black text-lg font-lg">
             Verification Number
           </label>
-          <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-lg mt-2">
+          <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl mt-2">
             <input
               type="number"
               placeholder="Enter verification number"
@@ -55,7 +55,7 @@ const Changepassword = () => {
           <label htmlFor="" className="text-black text-lg font-lg">
             New Password
           </label>
-          <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-lg mt-2">
+          <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl mt-2">
             <input
               type="password"
               placeholder="Enter new password"
@@ -98,7 +98,7 @@ const Changepassword = () => {
           <label htmlFor="" className="text-black text-lg font-lg">
             Confirm New Password
           </label>
-          <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-lg mt-2">
+          <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl mt-2">
             <input
               type="password"
               placeholder="Confirm your password"

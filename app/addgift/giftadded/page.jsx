@@ -35,7 +35,7 @@ const Giftadded = () => {
           <input
             type="text"
             // placeholder={`https://promisecard.vercel.app/${user.displayName}`}
-            className="p-2 bg-[#F7F3F3] border rounded-s-lg text-sm"
+            className="p-2 bg-[#F7F3F3] border rounded-s-2xl text-sm"
           />
           <button className="text-primary p-2 bg-[#F7F3F3] border rounded-e-lg text-sm">
             Copy
