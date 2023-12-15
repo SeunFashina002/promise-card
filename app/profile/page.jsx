@@ -8,6 +8,7 @@ import { collection, getDocs, where, query } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Navigation from "@/components/Navigation";
 
 const Profile = () => {
   const router = useRouter();
@@ -110,6 +111,7 @@ const Profile = () => {
           onClick={handleClick}
         />
       </section>
+      <Navigation />
     </>
   );
 };
