@@ -41,10 +41,6 @@ export const Home = ({ user, username }) => {
     fetchGifts();
   }, [user, username]);
 
-  // if (user && gifts.length < 1) {
-  //   return <EmptyGift />;
-  // }
-
   if (!dataLoaded) {
     return <div className="h-screen w-full bg-[#FFFDFA]"></div>;
   }
