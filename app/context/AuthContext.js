@@ -42,14 +42,6 @@ export const AuthContextProvider = ({ children }) => {
         avatar: "",
       });
 
-      setUser({
-        uid: user.uid,
-        email: user.email,
-        username: username,
-        bio: "",
-        avatar: "",
-      });
-
       return "user created successfully";
     } catch (error) {
       console.error("Error creating user:", error);
@@ -129,7 +121,6 @@ export const AuthContextProvider = ({ children }) => {
     return () => unsubscribe();
   }, [user]);
 
-  console.log(user);
   const contextValue = {
     user,
     createUser,

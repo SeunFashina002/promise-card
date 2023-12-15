@@ -3,7 +3,7 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import Navigation from "@/components/Navigation";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { UserAuth } from "@/context/AuthContext";
@@ -12,6 +12,18 @@ const Customgift = () => {
   const [giftName, setGiftName] = useState("");
   const router = useRouter();
   const { user } = UserAuth();
+
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      setUserId(user.uid);
+    }
+  }, [user]);
+
+  if (!userId) {
+    return <div className="h-screen w-full bg-[#FFFDFA]"></div>;
+  }
 
   if (!user) {
     router.push("/sign-in");
@@ -28,7 +40,7 @@ const Customgift = () => {
       await addDoc(collection(db, "gifts"), {
         name: giftName,
         image: "",
-        user: user.uid,
+        user: userId,
       });
 
       router.push("/addgift/giftadded");
@@ -41,7 +53,7 @@ const Customgift = () => {
     <>
       <section className=" p-4 md:w-2/4 mx-auto">
         <div className="flex justify-between p-10">
-          {/* <svg
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -51,12 +63,12 @@ const Customgift = () => {
             <path
               d="M15.09 19.9201L8.56997 13.4001C7.79997 12.6301 7.79997 11.3701 8.56997 10.6001L15.09 4.08008"
               stroke="#292D32"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
-          </svg> */}
+          </svg>
 
           <Link href="/" className="text-primary font-bold ">
             Cancel
