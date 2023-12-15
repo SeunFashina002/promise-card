@@ -23,8 +23,8 @@ const GiftList = ({ id, title, img, bg, gift, setSelectedGifts }) => {
       <div
         key={id}
         onClick={() => toggleGiftSelection(gift)}
-        className={`p-4 gap-4 flex items-center border-t-2 cursor-pointer ${
-          clickedGift ? bg : ""
+        className={`p-4 gap-4 flex items-center border-t  cursor-pointer ${
+          clickedGift ? `bg border-primary border-b` : ""
         }`}
       >
         <div className={`${bg} p-2 rounded-lg`}>

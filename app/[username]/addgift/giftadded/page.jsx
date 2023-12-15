@@ -12,7 +12,7 @@ const Giftadded = () => {
   // }
 
   function handleClick() {
-    router.push("/homepage");
+    router.push("/:id");
   }
   return (
     <>

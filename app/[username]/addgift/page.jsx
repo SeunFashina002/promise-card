@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { gifts } from "../../_data/data";
+import { gifts } from "../../../_data/data";
 import GiftList from "@/components/GiftList";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
@@ -32,7 +32,7 @@ const Addgift = () => {
           user: user.uid,
         });
         console.log("gift added");
-        router.push("/addgift/giftadded");
+        router.push("/:id/addgift/giftadded");
       } catch (error) {
         console.log("error adding gift", error);
       }

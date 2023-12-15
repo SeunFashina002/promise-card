@@ -4,10 +4,10 @@ import Link from "next/link";
 
 const Forgotpassword = () => {
   return (
-    <section className="md:w-2/4 mx-auto px-8 pt-14">
+    <section className="md:w-2/4 mx-auto px-8 pt-8">
       <h1 className="text-black text-2xl font-semibold">Reset Password</h1>
 
-      <form className="pt-14">
+      <form className="pt-8">
         <div>
           <label htmlFor="" className="text-black text-lg font-lg">
             Username
@@ -42,7 +42,7 @@ const Forgotpassword = () => {
           </div>
         </div>
 
-        <div className="mt-11">
+        <div className="mt-8">
           <label htmlFor="" className="text-black text-lg font-lg">
             Email
           </label>
@@ -84,7 +84,7 @@ const Forgotpassword = () => {
 
           <div className="flex flex-wrap pt-4 justify-center gap-2">
             <p className="text-black text-lg">Don’t have an account?</p>
-            <Link href="/signup" className="text-primary text-lg">
+            <Link href="/signup" className="text-primary text-lg font-semibold">
               Sign Up
             </Link>
           </div>

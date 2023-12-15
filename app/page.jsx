@@ -3,6 +3,7 @@
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 const Welcome = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const Welcome = () => {
     router.push("/sign-up");
   };
   return (
-    <section className="bg-[#DD5318] flex flex-col justify-center items-center h-screen w-full px-6 lg:px-9">
+    <section className="bg-gradient flex flex-col justify-center items-center h-screen w-full px-6 lg:px-9">
       <div>
         <Image
           src="/home.svg"
@@ -32,6 +33,13 @@ const Welcome = () => {
         className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5"
         label="Get Started"
       />
+
+      <div className="flex flex-wrap gap-2 mt-28">
+        <p className="text-lg">Have any sugesstion/report?</p>
+        <Link href="#" className="text-lg text-primary font-bold ">
+          Send Here
+        </Link>
+      </div>
     </section>
   );
 };

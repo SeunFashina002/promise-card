@@ -39,7 +39,7 @@ const Signin = () => {
   };
 
   return (
-    <section className="py-6 px-6  h-screen flex flex-col justify-center md:items-center w-full bg-[#FFFDFA] lg:px-9">
+    <section className="py-6 px-6  h-screen flex flex-col md:items-center w-full bg-[#FFFDFA] lg:px-9">
       <h3
         className={`${inter.className} text-2xl font-semibold text-black mb-8`}
       >
@@ -79,14 +79,14 @@ const Signin = () => {
           <p className={`${inter.className} my-4`}>
             Email <span className="text-[#C015A4] text-lg">*</span>
           </p>
-          <div className="flex border border-gray-300 rounded-2xl justify-between items-center">
+          <div className="flex border bg-[#F7F3F3] border-gray-300 rounded-2xl justify-between items-center">
             <input
               type="email"
               required={true}
               value={email.trim()}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
-              placeholder=""
+              className=" bg-transparent py-4 px-3 rounded-2xl w-[90%] text-sm outline-none"
+              placeholder="Enter your username"
             />
 
             <FaUserCircle className="text-3xl  text-neutral-500 ml-1 mr-2" />
@@ -94,17 +94,27 @@ const Signin = () => {
           <p className={`${inter.className} my-4`}>
             Password <span className="text-[#C015A4] text-lg">*</span>
           </p>
-          <div className="flex border border-gray-300 rounded-2xl justify-between items-center">
+          <div className="flex bg-[#F7F3F3] border border-gray-300 rounded-2xl justify-between items-center">
             <input
               type="password"
               value={password.trim()}
               required={true}
               onChange={(e) => setPassword(e.target.value)}
-              className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
+              className="bg-transparent py-4 px-3 rounded-2xl w-[90%] text-sm outline-none"
+              placeholder="Enter your password"
             />
 
             <IoIosEyeOff className="text-3xl md:text-4xl text-neutral-500 ml-1 mr-2" />
           </div>
+        </div>
+
+        <div className="flex justify-end py-4">
+          <Link
+            href="/forgotpassword"
+            className="text-primary font-semibold text-lg"
+          >
+            Forgot Password?
+          </Link>
         </div>
         <div className="mt-12">
           <Button
@@ -122,6 +132,12 @@ const Signin = () => {
             </Link>
           </p>
         </div>
+      </div>
+      <div className="flex flex-wrap gap-2 mt-28">
+        <p className="text-lg text-black">Have any sugesstion/report?</p>
+        <Link href="#" className="text-lg text-primary font-bold ">
+          Send Here
+        </Link>
       </div>
     </section>
   );
