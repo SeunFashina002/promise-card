@@ -6,30 +6,43 @@ import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { collection, addDoc } from "firebase/firestore";
 import { UserAuth } from "@/context/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "@/firebase/config";
 
 const { default: Navigation } = require("@/components/Navigation");
+
+
+
 
 const Addgift = () => {
   const { user } = UserAuth();
   const router = useRouter();
 
-  // if (!user) {
-  //   router.push('/sign-in')
-  // }
-
   const [selectedGifts, setSelectedGifts] = useState([]);
-  console.log(selectedGifts);
+  const [userId, setUserId] = useState(null);
 
-  // handle adding selected gift to the database
+  useEffect(() => {
+    if (user) {
+      setUserId(user.uid);
+    }
+  }, [user]);
+
+  if (!userId) {
+    return <div className="h-screen w-full bg-[#FFFDFA]"></div>;
+  }
+
+  if (!user) {
+    router.push('/sign-in')
+  }
+
   const addSelectedGifts = async () => {
+
     for (const gift of selectedGifts) {
       try {
         await addDoc(collection(db, "gifts"), {
           name: gift.title,
           image: gift.img,
-          user: user.uid,
+          user: userId,
         });
         console.log("gift added");
         router.push("/addgift/giftadded");
@@ -41,7 +54,7 @@ const Addgift = () => {
     setSelectedGifts([]);
   };
 
-  const addgift = () => {
+  const addCustomGift = () => {
     router.push("/customgift");
   };
 
@@ -59,10 +72,10 @@ const Addgift = () => {
             <path
               d="M15.09 19.9201L8.56997 13.4001C7.79997 12.6301 7.79997 11.3701 8.56997 10.6001L15.09 4.08008"
               stroke="#292D32"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
 
@@ -97,7 +110,7 @@ const Addgift = () => {
             <Button
               className="bg-[#F7F3F3] text-black w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full"
               label="Add custom gift"
-              onClick={addgift}
+              onClick={addCustomGift}
             />
           </div>
         </div>
