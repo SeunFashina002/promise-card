@@ -8,48 +8,45 @@ import { collection, getDocs, where, query } from 'firebase/firestore';
 import { db } from "@/firebase/config";
 import { useState, useEffect } from 'react';
 
+
 const Profile = () => {
   const router = useRouter();
   const { user } = UserAuth();
-  if (!user) {
-    router.push('/sign-in')
-  }
-
-    const [userProfile, setUserProfile] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
-    
-    const { displayName } = user;
-    console.log("here", displayName)
-
-    // If the username exists, fetch the user profile
-    if (displayName) {
+    if (user) {
       const fetchUserProfile = async () => {
+        const { displayName } = user;
         try {
-          // Query Firestore to get the user profile with the given username
-          const q = query(collection(db, 'users'), where('username', '==', displayName));
+          const q = query(collection(db, "users"), where("username", "==", displayName));
           const querySnapshot = await getDocs(q);
 
           if (!querySnapshot.empty) {
-            // If the user profile exists, set it in the state
             setUserProfile(querySnapshot.docs[0].data());
           } else {
-            // Handle case when the user profile is not found
-            console.error('User profile not found.');
+            console.error("User profile not found.");
           }
         } catch (error) {
-          console.error('Error fetching user profile:', error);
+          console.error("Error fetching user profile:", error);
         }
       };
 
       fetchUserProfile();
     }
-  }, [user]); // This will run whenever the route parameters change
+  }, [user]);
 
+  if (!userProfile) {
+    return <div className="h-screen w-full bg-[#FFFDFA]"></div>;
+  }
 
+  if (!user) {
+    router.push('/sign-in')
+  }
   const handleClick = () => {
     router.push("/profile/updateprofile");
   };
+
   return (
     <>
       <section className="md:w-2/4 mx-auto p-4">
@@ -73,9 +70,7 @@ const Profile = () => {
         </div>
 
         <div className="p-6 border rounded-lg my-8 bg-[#EDEFEE]">
-          <p className="text-black">
-            {userProfile.bio}
-          </p>
+          <p className="text-black">{userProfile.bio}</p>
         </div>
 
         <div className="py-4">
@@ -107,6 +102,9 @@ const Profile = () => {
     </>
   );
 };
+
+
+
 
 export default Profile;
 

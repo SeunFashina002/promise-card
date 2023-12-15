@@ -10,6 +10,8 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   updateProfile,
+  setPersistence,
+  browserLocalPersistence,
 } from "firebase/auth";
 
 const AuthContext = createContext();
@@ -60,8 +62,16 @@ export const AuthContextProvider = ({ children }) => {
     );
     return querySnapshot.empty;
   };
+
   const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+    const user = setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        return signInWithEmailAndPassword(auth, email, password);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    return user
   };
 
   const logout = () => {
@@ -119,6 +129,7 @@ export const AuthContextProvider = ({ children }) => {
     return () => unsubscribe();
   }, [user]);
 
+  console.log(user);
   const contextValue = {
     user,
     createUser,
@@ -135,3 +146,4 @@ export const AuthContextProvider = ({ children }) => {
 export const UserAuth = () => {
   return useContext(AuthContext);
 };
+
