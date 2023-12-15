@@ -8,9 +8,6 @@ import { collection, getDocs, where, query } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { useState, useEffect } from "react";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-
 const Profile = () => {
   const router = useRouter();
   const { user } = UserAuth();
@@ -66,16 +63,10 @@ const Profile = () => {
         </div>
 
         <div className="flex gap-2 items-center p-6">
-          <Image
-            src=""
-            alt=""
-            className=" bg-black rounded-full gradient-border border-4"
-            width={100}
-            height={100}
-          />
+          <div className="w-16 h-16 bg-black rounded-full border-primary border-4"></div>
           <div>
             <h1 className="text-black text-xl font-bold">
-              {/* {userProfile.username} */}
+              {userProfile.username}
             </h1>
           </div>
         </div>
@@ -87,8 +78,8 @@ const Profile = () => {
         <div className="py-4">
           <input
             type="text"
-            // placeholder={`https://promisecard.vercel.app/${user.displayName}`}
-            className="p-4 bg-[#F7F3F3] border rounded-2xl w-full mb-4"
+            placeholder={`https://promisecard.vercel.app/${user.displayName}`}
+            className="p-4 bg-[#F7F3F3] border rounded-lg w-full mb-4"
           />
           <Button
             className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full"
