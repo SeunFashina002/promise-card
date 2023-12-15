@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Button from "@/components/Button";
+import Image from "next/image";
 
 const Updateprofile = () => {
   return (
@@ -8,14 +9,16 @@ const Updateprofile = () => {
         <h1 className="text-black text-2xl p-4 mt-8">Profile</h1>
 
         <div className="flex gap-2 items-center p-4">
-          <div className="w-16 h-16 bg-black rounded-full border-primary border-4"></div>
+          <Image
+            src=""
+            alt=""
+            className=" bg-black rounded-full gradient-border border-4"
+            width={100}
+            height={100}
+          />
           <div>
             <h1 className="text-black text-xl font-bold">Fola J</h1>
-            <input
-              type="file"
-              className="file:bg-transparent file:border-0"
-              placeholder="Add profile picture"
-            />
+            <p className="text-primary font-semibold">Add profile picture</p>
           </div>
         </div>
 
@@ -25,7 +28,7 @@ const Updateprofile = () => {
               <label htmlFor="" className="text-black">
                 Username
               </label>
-              <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-lg">
+              <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl">
                 <input
                   type="text"
                   placeholder="Fola J"
@@ -64,7 +67,7 @@ const Updateprofile = () => {
                 className="bg-[#F7F3F3] border border-[#C2BABA] rounded-lg p-4 outline-none text-[#888B89] text-lg"
                 name=""
                 id=""
-                cols="30"
+                cols="10"
                 rows="10"
               >
                 Leave a short note for people convincing them why you need the

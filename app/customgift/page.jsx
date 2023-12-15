@@ -14,12 +14,12 @@ const Customgift = () => {
   const { user } = UserAuth();
 
   if (!user) {
-    router.push('/sign-in')
+    router.push("/sign-in");
   }
 
   const addGift = async (e) => {
     e.preventDefault();
-    
+
     try {
       if (!giftName) {
         alert("please select enter a gift name");
@@ -35,7 +35,6 @@ const Customgift = () => {
     } catch (error) {
       console.error("Error adding gift to the database: ", error);
     }
-    
   };
 
   return (
@@ -81,13 +80,13 @@ const Customgift = () => {
               required={true}
               value={giftName}
               onChange={(e) => setGiftName(e.target.value)}
-              className="bg-[#F7F3F3] border rounded-lg p-4 text-black"
+              className="bg-[#F7F3F3] border rounded-2xl p-4 text-black"
             />
             <input
               type="file"
               name=""
               id=""
-              className="file:bg-[#C015A40D]  my-4 text-black file:border-3 file:border-primary file:rounded-lg file:p-8 file:border-dashed hidden "
+              className="file:bg-[#C015A40D]  my-4 text-black file:border-3 file:border-primary file:rounded-2xl file:p-8 file:border-dashed hidden "
             />
             <Button
               className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full mt-11"

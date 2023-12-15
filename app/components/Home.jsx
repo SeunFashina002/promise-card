@@ -7,11 +7,16 @@ import { PromisePage } from "./PromisePage";
 import { useRouter } from "next/navigation";
 import { getGiftsForUser, getUserIdByUsername } from "@/utils/db_utils";
 import Navigation from "./Navigation";
+import Button from "@/components/Button";
 
 export const Home = ({ user, username }) => {
   const router = useRouter();
   const [gifts, setGifts] = useState([]);
   const [dataLoaded, setdataLoaded] = useState(false);
+
+  function handleClick() {
+    router.push("/addgift");
+  }
 
   useEffect(() => {
     const fetchGifts = async () => {
@@ -49,18 +54,13 @@ export const Home = ({ user, username }) => {
 
   return (
     <>
-      <section className="  p-2 flex flex-col justify-center items-center bg-[#FFFDFA] h-4/5">
+      <section className="  p-2 flex flex-col items-center bg-[#FFFDFA] h-screen relative">
         <div className="w-full px-6 lg:w-2/4">
           {user && gifts.length > 0 && (
             <div className="flex justify-between">
               <div className="flex items-center gap-2 text-black">
-                <h2 className="font-bold">My gifts</h2>
-                <PiHandHeartBold />
+                <h2 className="text-xl">Your Gift Items</h2>
               </div>
-
-              <Link href="/" className="text-primary font-bold">
-                See All
-              </Link>
             </div>
           )}
           {user && gifts.length > 0 ? (
@@ -73,6 +73,12 @@ export const Home = ({ user, username }) => {
             <EmptyGift />
           )}
         </div>
+
+        <Button
+          className="bg-[#C015A4] text-white  p-4 text-center border rounded-full absolute bottom-24"
+          label="Add gift"
+          onClick={handleClick}
+        />
       </section>
       <Navigation />
     </>

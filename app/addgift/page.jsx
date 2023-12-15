@@ -9,19 +9,18 @@ import { UserAuth } from "@/context/AuthContext";
 import { useState } from "react";
 import { db } from "@/firebase/config";
 
-
 const { default: Navigation } = require("@/components/Navigation");
 
 const Addgift = () => {
   const { user } = UserAuth();
   const router = useRouter();
 
-  if (!user) {
-    router.push('/sign-in')
-  }
+  // if (!user) {
+  //   router.push('/sign-in')
+  // }
 
   const [selectedGifts, setSelectedGifts] = useState([]);
-  console.log(selectedGifts)
+  console.log(selectedGifts);
 
   // handle adding selected gift to the database
   const addSelectedGifts = async () => {
@@ -35,11 +34,11 @@ const Addgift = () => {
         console.log("gift added");
         router.push("/addgift/giftadded");
       } catch (error) {
-        console.log("error adding gift", error)
+        console.log("error adding gift", error);
       }
     }
 
-    setSelectedGifts([])
+    setSelectedGifts([]);
   };
 
   const addgift = () => {
@@ -48,7 +47,7 @@ const Addgift = () => {
 
   return (
     <>
-      <div>
+      <div className="h-full">
         <div className="flex justify-between p-10">
           <svg
             xmlns="http://www.w3.org/2000/svg"

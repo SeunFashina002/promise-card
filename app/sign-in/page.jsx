@@ -19,8 +19,8 @@ const Signin = () => {
   const handleSignin = async () => {
     try {
       const { user } = await login(email, password);
-      
-      console.log(user.displayName)
+
+      console.log(user.displayName);
       setEmail("");
       setPassword("");
       router.push(`/${user.displayName}`);
@@ -86,6 +86,7 @@ const Signin = () => {
               value={email.trim()}
               onChange={(e) => setEmail(e.target.value)}
               className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
+              placeholder=""
             />
 
             <FaUserCircle className="text-3xl  text-neutral-500 ml-1 mr-2" />

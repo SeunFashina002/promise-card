@@ -1,25 +1,31 @@
+"use client";
+
 import Gift from "@/components/Gift";
 import Link from "next/link";
 import { PiHandHeartBold } from "react-icons/pi";
 
 import { gifts } from "../../_data/data";
+import Button from "@/components/Button";
 import Navigation from "@/components/Navigation";
 
 export const PromisePage = () => {
+  function handleClick() {
+    router.push("/addgift");
+  }
   return (
     <>
-      <section className="  p-2 flex flex-col justify-center items-center bg-[#FFFDFA] h-screen">
-        <div className="py-4 text-center">
-          <h1 className="text-2xl font-semibold text-black font-heading">
+      <section className="  p-2 flex flex-col  items-center bg-[#FFFDFA] h-screen">
+        <div className="py-14 text-center">
+          <h1 className="text-4xl font-semibold text-black font-heading">
             Promise Card
           </h1>
-          <h2 className="text-black">God Loves Cheerful Givers </h2>
+          <h2 className="text-black text-xl">God Loves Cheerful Givers </h2>
         </div>
 
         <div className="w-full px-6 lg:w-2/4">
           <div className="flex justify-between">
             <div className="flex items-center gap-2 text-black">
-              <h2 className="font-bold">Promise me</h2>
+              <h2 className="text-lg">Promise me</h2>
               <PiHandHeartBold />
             </div>
 
@@ -28,13 +34,19 @@ export const PromisePage = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 p-4 gap-4">
+          <div className="grid grid-cols-2 py-4 gap-4">
             {gifts.map((gift) => (
               <Gift key={gift.id} {...gift} />
             ))}
           </div>
         </div>
+        <Button
+          className="bg-[#C015A4] text-white  p-4 text-center border rounded-full absolute bottom-24"
+          label="Give"
+          onClick={handleClick}
+        />
       </section>
+      <Navigation />
     </>
   );
 };

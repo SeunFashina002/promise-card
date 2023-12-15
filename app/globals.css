@@ -62,3 +62,39 @@ body {
 .giftboxbg {
   @apply bg-[#E4EFFF];
 }
+
+
+.gradient-border {
+  border-radius: 64px;
+  border: 2px solid var(--LINEAR, #C015A4);
+  /* background: url(<path-to-image>), lightgray 50% / cover no-repeat, #D9D9D9; */
+}
+
+
+
+/* Styles for Toggle Switch */
+#toggle:checked+.toggle__line {
+  background-color: #C015A4;
+}
+
+#toggle:checked+.toggle__line+.toggle__dot {
+  transform: translateX(100%);
+}
+
+/* Additional styles for aesthetics */
+.toggle__line {
+  transition: background-color 0.3s;
+}
+
+.toggle__dot {
+  transition: transform 0.3s;
+}
+
+
+.bg-gradient {
+  background-image: radial-gradient(#DD5318, #ECBB3A);
+}
+
+.text-gradient {
+  color: #C015A4;
+}
