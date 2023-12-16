@@ -1,7 +1,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { auth, db } from "@/firebase/config";
 import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
-
+import { checkUsernameAvailability } from "@/utils/db_utils";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -48,12 +48,12 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const checkUsernameAvailability = async (username) => {
-    const querySnapshot = await getDocs(
-      query(collection(db, "users"), where("username", "==", username))
-    );
-    return querySnapshot.empty;
-  };
+  // const checkUsernameAvailability = async (username) => {
+  //   const querySnapshot = await getDocs(
+  //     query(collection(db, "users"), where("username", "==", username))
+  //   );
+  //   return querySnapshot.empty;
+  // };
 
   const login = (email, password) => {
     const user = setPersistence(auth, browserLocalPersistence)

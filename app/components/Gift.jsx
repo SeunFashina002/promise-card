@@ -1,3 +1,4 @@
+import { deleteDoc } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -8,6 +9,16 @@ const Gift = ({ id, name, image, bg = "moneybg" }) => {
   const handleSelection = () => {
     setselectedGift(!selectedGift);
   };
+
+  const handleRemoveGift = async(giftId) => {
+    try {
+      const giftRef = doc(db, 'gifts', giftId)
+      await deleteDoc(giftRef)
+      console.log("gift deleted successfully")
+    } catch (error) {
+      console.log("error deleting gift: ", error.message)
+    }
+  }
   return (
     <>
       <Link
@@ -30,7 +41,10 @@ const Gift = ({ id, name, image, bg = "moneybg" }) => {
 
         <h2 className=" text-black">{name}</h2>
 
-        <div className="bg-slate-50 rounded-full absolute right-4 top-4 ">
+        <div
+          className="bg-slate-50 rounded-full absolute right-4 top-4 "
+          onClick={() => handleRemoveGift(id)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
