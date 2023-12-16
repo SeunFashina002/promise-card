@@ -1,8 +1,75 @@
+"use client";
 import Navigation from "@/components/Navigation";
 import Button from "@/components/Button";
 import Image from "next/image";
+import {
+  getDoc,
+  where,
+  doc,
+  updateDoc,
+  getDocs,
+  query,
+  collection,
+} from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { UserAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+import { db } from "@/firebase/config";
 
 const Updateprofile = () => {
+  const { user } = UserAuth();
+  const router = useRouter();
+
+  const [profileData, setProfileData] = useState({
+    username: "",
+    bio: "",
+    avatar: "",
+  });
+  const [dataLoaded, setdataLoaded] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      const fetchProfileData = async () => {
+        try {
+          const q = query(
+            collection(db, "users"),
+            where("uid", "==", user.uid)
+          );
+          const querySnapshot = await getDocs(q);
+          // console.log("userDoc", userDoc);
+          if (!querySnapshot.empty) {
+            setProfileData(querySnapshot.docs[0].data());
+            setdataLoaded(true);
+          } else {
+            console.log("no profile found", user.uid);
+          }
+        } catch (error) {
+          console.log("error getting user profile: ", error.message);
+        }
+      };
+
+      fetchProfileData();
+    }
+  }, [user]);
+
+  if (!dataLoaded) {
+    return <div className="h-screen w-full bg-[#FFFDFA]"></div>;
+  }
+
+  if (!user) {
+    router.push("/sign-in");
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProfileData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await updateDoc(doc(db, "users", user.uid), profileData);
+    router.push("/profile");
+  };
   return (
     <>
       <section className="md:w-2/4 mx-auto p-4">
@@ -17,7 +84,9 @@ const Updateprofile = () => {
             height={100}
           />
           <div>
-            <h1 className="text-black text-xl font-bold">Fola J</h1>
+            <h1 className="text-black text-xl font-bold">
+              {profileData.username}
+            </h1>
             <p className="text-primary font-semibold">Add profile picture</p>
           </div>
         </div>
@@ -31,8 +100,13 @@ const Updateprofile = () => {
               <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl">
                 <input
                   type="text"
-                  placeholder="Fola J"
+                  name="username"
+                  placeholder={
+                    profileData.username ? profileData.username : "Fola J"
+                  }
                   className="outline-none text-black bg-transparent"
+                  onChange={handleInputChange}
+                  value={profileData.username}
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -65,18 +139,22 @@ const Updateprofile = () => {
 
               <textarea
                 className="bg-[#F7F3F3] border border-[#C2BABA] rounded-lg p-4 outline-none text-[#888B89] text-lg"
-                name=""
+                name="bio"
+                onChange={handleInputChange}
+                value={profileData.bio}
                 id=""
                 cols="10"
                 rows="10"
               >
-                Leave a short note for people convincing them why you need the
-                items
+                {profileData.bio
+                  ? profileData.bio
+                  : "Leave a short note for people convincing them why you need the items"}
               </textarea>
             </div>
             <Button
               className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full "
               label="Save"
+              onClick={(e) => handleSubmit(e)}
             />
           </form>
         </div>
