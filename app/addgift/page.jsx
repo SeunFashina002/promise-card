@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { gifts } from "../../../_data/data";
+import { gifts } from "../../_data/data";
 import GiftList from "@/components/GiftList";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
@@ -10,9 +10,6 @@ import { useEffect, useState } from "react";
 import { db } from "@/firebase/config";
 
 const { default: Navigation } = require("@/components/Navigation");
-
-
-
 
 const Addgift = () => {
   const { user } = UserAuth();
@@ -32,11 +29,10 @@ const Addgift = () => {
   }
 
   if (!user) {
-    router.push('/sign-in')
+    router.push("/sign-in");
   }
 
   const addSelectedGifts = async () => {
-
     for (const gift of selectedGifts) {
       try {
         await addDoc(collection(db, "gifts"), {
