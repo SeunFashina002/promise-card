@@ -3,7 +3,6 @@ import Navigation from "@/components/Navigation";
 import Button from "@/components/Button";
 import Image from "next/image";
 import {
-  getDoc,
   where,
   doc,
   updateDoc,
@@ -15,6 +14,8 @@ import { useState, useEffect } from "react";
 import { UserAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { db } from "@/firebase/config";
+import { checkUsernameAvailability } from "@/utils/db_utils";
+import { updateProfile } from "firebase/auth";
 
 const Updateprofile = () => {
   const { user } = UserAuth();
@@ -65,8 +66,21 @@ const Updateprofile = () => {
     setProfileData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const handleFilechage = () => {
+    console.log("TODO:");
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // check username uniqueness before updating profile
+    const usernameUnique = await checkUsernameAvailability(profileData.username)
+    if (!usernameUnique) {
+      return alert("this username has already been taken")
+    }
+    // update display name in auth table
+    await updateProfile(user, { displayName: username });
+    
+    // update user's name in users db
     await updateDoc(doc(db, "users", user.uid), profileData);
     router.push("/profile");
   };
