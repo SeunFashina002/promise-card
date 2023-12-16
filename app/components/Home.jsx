@@ -15,7 +15,7 @@ export const Home = ({ user, username }) => {
   const [dataLoaded, setdataLoaded] = useState(false);
 
   function handleClick() {
-    router.push("/addgift");
+    router.push("/:id/addgift");
   }
 
   useEffect(() => {

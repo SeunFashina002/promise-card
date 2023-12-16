@@ -1,10 +1,16 @@
 "use client";
 import Button from "@/components/Button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Changepassword = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/signin");
+  };
   return (
-    <section className="md:w-2/4 mx-auto px-8 pt-14">
+    <section className="md:w-2/4 mx-auto px-8 pt-8">
       <h1 className="text-black text-2xl font-semibold">Change Password</h1>
 
       <div className="p-4 bg-[#FCF1F6]  border border-[#C015A4] rounded-lg mt-8  text-black">
@@ -16,7 +22,7 @@ const Changepassword = () => {
         </p>
       </div>
 
-      <form className="pt-11">
+      <form className="pt-8">
         <div>
           <label htmlFor="" className="text-black text-lg font-lg">
             Verification Number
@@ -51,7 +57,7 @@ const Changepassword = () => {
           </div>
         </div>
 
-        <div className="mt-11">
+        <div className="mt-8">
           <label htmlFor="" className="text-black text-lg font-lg">
             New Password
           </label>
@@ -94,7 +100,7 @@ const Changepassword = () => {
           </div>
         </div>
 
-        <div className="mt-11">
+        <div className="mt-8">
           <label htmlFor="" className="text-black text-lg font-lg">
             Confirm New Password
           </label>
@@ -141,11 +147,12 @@ const Changepassword = () => {
           <Button
             className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full "
             label="Reset Password"
+            onClick={handleClick}
           />
 
           <div className="flex flex-wrap pt-4 justify-center gap-2">
             <p className="text-black text-lg">Don’t have an account?</p>
-            <Link href="/signup" className="text-primary text-lg">
+            <Link href="/signup" className="text-primary text-lg font-semibold">
               Sign Up
             </Link>
           </div>

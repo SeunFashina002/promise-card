@@ -26,7 +26,7 @@ const Giftadded = () => {
     router.push("/sign-in");
   }
   function handleClick() {
-    router.push("/homepage");
+    router.push("/:id");
   }
   return (
     <>

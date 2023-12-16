@@ -80,13 +80,14 @@ const Signup = () => {
           <p className={`${inter.className} my-4`}>
             Username <span className="text-[#C015A4] text-lg">*</span>
           </p>
-          <div className="flex border border-gray-300 rounded-2xl justify-between items-center">
+          <div className="flex border bg-[#F7F3F3] border-gray-300 rounded-2xl justify-between items-center">
             <input
               type="text"
               value={username.trim()}
               onChange={(e) => setUsername(e.target.value)}
               required={true}
-              className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
+              className=" py-4 bg-transparent px-3 rounded-2xl w-[90%] text-sm outline-none  "
+              placeholder="Enter your username"
             />
 
             <FaUserCircle className="text-3xl  text-neutral-500 ml-1 mr-2" />
@@ -95,13 +96,14 @@ const Signup = () => {
           <p className={`${inter.className} my-4`}>
             Email <span className="text-[#C015A4] text-lg">*</span>
           </p>
-          <div className="flex border border-gray-300 rounded-2xl justify-between items-center">
+          <div className="flex border bg-[#F7F3F3] border-gray-300 rounded-2xl justify-between items-center">
             <input
               type="email"
               required={true}
               value={email.trim()}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
+              className=" bg-transparent py-4 px-3 rounded-2xl w-[90%] text-sm outline-none"
+              placeholder="Enter your email address"
             />
 
             <MdOutlineMail className="text-3xl  text-neutral-500 ml-1 mr-2" />
@@ -109,13 +111,14 @@ const Signup = () => {
           <p className={`${inter.className} my-4`}>
             Password <span className="text-[#C015A4] text-lg">*</span>
           </p>
-          <div className="flex border border-gray-300 rounded-2xl justify-between items-center">
+          <div className="flex border bg-[#F7F3F3] border-gray-300 rounded-2xl justify-between items-center">
             <input
               type="password"
               value={password.trim()}
               required={true}
               onChange={(e) => setPassword(e.target.value)}
-              className="h-full py-4 px-3 rounded-2xl w-[90%] text-xl outline-none"
+              className=" bg-transparent py-4 px-3 rounded-2xl w-[90%] text-sm outline-none"
+              placeholder="Enter password"
             />
 
             <IoIosEyeOff className="text-3xl md:text-4xl text-neutral-500 ml-1 mr-2" />
@@ -137,6 +140,13 @@ const Signup = () => {
             </Link>
           </p>
         </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mt-28">
+        <p className="text-lg text-black">Have any sugesstion/report?</p>
+        <Link href="#" className="text-lg text-primary font-bold ">
+          Send Here
+        </Link>
       </div>
     </section>
   );
