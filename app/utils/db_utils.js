@@ -19,3 +19,10 @@ export const getUserIdByUsername = async (username) => {
 
   return querySnapshot.docs[0].data().uid;
 };
+
+export const checkUsernameAvailability = async (username) => {
+  const querySnapshot = await getDocs(
+    query(collection(db, "users"), where("username", "==", username))
+  );
+  return querySnapshot.empty;
+};
