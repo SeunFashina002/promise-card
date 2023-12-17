@@ -2,37 +2,37 @@ export const gifts = [
   {
     id: 1,
     title: "Money",
-    img: "/images/image 4.png",
+    img: "https://firebasestorage.googleapis.com/v0/b/promise-card-89e6e.appspot.com/o/images%2Fmoney.png?alt=media",
     bg: "moneybg",
   },
   {
     id: 2,
     title: "Chocolate",
-    img: "/images/image 5.png",
+    img: "https://firebasestorage.googleapis.com/v0/b/promise-card-89e6e.appspot.com/o/images%2Fchocolate.png?alt=media",
     bg: "chocolatebg",
   },
   {
     id: 3,
     title: "Beach Trip",
-    img: "/images/image 6.png",
+    img: "https://firebasestorage.googleapis.com/v0/b/promise-card-89e6e.appspot.com/o/images%2Fbeach.png?alt=media",
     bg: "beachbg",
   },
   {
     id: 4,
     title: "Shoes",
-    img: "/images/image 7.png",
+    img: "https://firebasestorage.googleapis.com/v0/b/promise-card-89e6e.appspot.com/o/images%2Fshoes.png?alt=media",
     bg: "shoebg",
   },
   {
     id: 5,
     title: "Shirts",
-    img: "/images/image 8.png",
+    img: "https://firebasestorage.googleapis.com/v0/b/promise-card-89e6e.appspot.com/o/images%2Fshirt.png?alt=media",
     bg: "shirtbg",
   },
   {
     id: 6,
     title: "GiftBox",
-    img: "/images/image 9.png",
+    img: "https://firebasestorage.googleapis.com/v0/b/promise-card-89e6e.appspot.com/o/images%2Fgiftbox.png?alt=media",
     bg: "giftboxbg",
   },
 ];
