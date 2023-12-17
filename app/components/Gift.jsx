@@ -1,24 +1,27 @@
-import { deleteDoc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "@/firebase/config";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const Gift = ({ id, name, image, bg = "moneybg" }) => {
+const Gift = ({ id, name, image, bg="moneybg", setGifts }) => {
   const [selectedGift, setselectedGift] = useState(false);
 
   const handleSelection = () => {
     setselectedGift(!selectedGift);
   };
 
-  const handleRemoveGift = async(giftId) => {
+  const handleRemoveGift = async (giftId) => {
     try {
-      const giftRef = doc(db, 'gifts', giftId)
-      await deleteDoc(giftRef)
-      console.log("gift deleted successfully")
+      const giftRef = doc(db, "gifts", giftId);
+      await deleteDoc(giftRef);
+      setGifts((prevGifts) => prevGifts.filter((gift) => gift.id !== giftId))
+      console.log("gift deleted successfully");
     } catch (error) {
-      console.log("error deleting gift: ", error.message)
+      console.log("error deleting gift: ", error.message);
     }
-  }
+  };
+
   return (
     <>
       <Link
@@ -32,7 +35,7 @@ const Gift = ({ id, name, image, bg = "moneybg" }) => {
         onClick={handleSelection}
       >
         <Image
-          src="/images/image 9.png"
+          src={`${image ? image : "/images/image 9.png"}`}
           alt="gift-image"
           width={70}
           height={70}
