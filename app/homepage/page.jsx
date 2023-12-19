@@ -8,7 +8,7 @@ import { gifts } from "../../_data/data";
 import Button from "@/components/Button";
 import Navigation from "@/components/Navigation";
 
-export const PromisePage = () => {
+export const PromisePage = ({ user }) => {
   function handleClick() {
     router.push("/addgift");
   }
@@ -36,7 +36,7 @@ export const PromisePage = () => {
 
           <div className="grid grid-cols-2 py-4 gap-4">
             {gifts.map((gift) => (
-              <Gift key={gift.id} {...gift} />
+              <Gift key={gift.id} {...gift} user={user} />
             ))}
           </div>
         </div>
