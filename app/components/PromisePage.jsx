@@ -53,7 +53,9 @@ export const PromisePage = ({ username }) => {
 
           <div className="grid grid-cols-2 p-4 gap-4">
             {gifts.map((gift) => (
-              <Gift key={gift.id} {...gift} />
+              <div>
+                <Gift key={gift.id} {...gift} />
+              </div>
             ))}
           </div>
         </div>

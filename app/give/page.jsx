@@ -1,14 +1,16 @@
 "use client";
 import Gift from "@/components/Gift";
-import { gifts } from "../../_data/data";
 import Link from "next/link";
 import Button from "@/components/Button";
+import { gifts } from "../../_data/data";
+import Image from "next/image";
 
 const Give = () => {
+  console.log(gifts);
   return (
     <>
       <section className="md:w-2/4 p-4 mx-auto">
-        <div className="pb-14">
+        <div className="pb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -28,7 +30,26 @@ const Give = () => {
         </div>
 
         <form>
-          <div className="pb-14">
+          <div className="mb-4">
+            <label htmlFor="" className="text-black text-xl font-semibold ">
+              Choose Gift item
+            </label>
+          </div>
+          <div className="grid grid-cols-2 gap-4 pb-8">
+            {gifts.map((gift) => (
+              <div key={gift.id} className={`${gift.bg} p-4 rounded-2xl`}>
+                <input type="checkbox" name="" id="" />
+                <div className="flex flex-col items-center">
+                  <Image src={gift.img} alt="gift" width={40} height={40} />
+                  <label htmlFor="" className="text-black">
+                    {gift.title}
+                  </label>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div>{}</div>
+          <div className="pb-8">
             <label htmlFor="" className="text-black text-xl font-semibold">
               Giver's Name
             </label>
@@ -61,7 +82,7 @@ const Give = () => {
               </svg>
             </div>
           </div>
-          <div className="pb-14">
+          <div className="pb-8">
             <label htmlFor="" className="text-black text-xl font-semibold">
               Date
             </label>
@@ -117,49 +138,7 @@ const Give = () => {
 
           <div className="pb-14">
             <label htmlFor="" className="text-black text-xl font-semibold">
-              Promise
-            </label>
-
-            <div className="grid grid-cols-2 gap-4">
-              {gifts.slice(0, 1).map((gift) => (
-                <Gift key={gift.id} {...gift} />
-              ))}
-              <Link
-                href="/addgift"
-                className="text-black bg-[#EDEFEE] flex items-center justify-center flex-col rounded-lg"
-              >
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="65"
-                    height="64"
-                    viewBox="0 0 65 64"
-                    fill="none"
-                  >
-                    <path
-                      d="M16.5 32H48.5"
-                      stroke="#292D32"
-                      stroke-width="4"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M32.5 48V16"
-                      stroke="#292D32"
-                      stroke-width="4"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                <p>add gift</p>
-              </Link>
-            </div>
-          </div>
-
-          <div className="pb-14">
-            <label htmlFor="" className="text-black text-xl font-semibold">
-              Giver's Name
+              If you choosed money, How much?
             </label>
             <div className="flex gap-2  p-4 bg-[#F7F3F3] border rounded-lg mt-2">
               <select

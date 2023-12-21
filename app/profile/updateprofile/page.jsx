@@ -13,7 +13,7 @@ import {
 import { useState, useEffect } from "react";
 import { UserAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { db } from "@/firebase/config";
+import { db, storage } from "@/firebase/config";
 import { checkUsernameAvailability } from "@/utils/db_utils";
 import { updateProfile } from "firebase/auth";
 
@@ -66,20 +66,32 @@ const Updateprofile = () => {
     setProfileData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleFilechage = () => {
-    console.log("TODO:");
-  }
+  const handleFilechage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const avatarRef = storage.ref(`images/${user.uid}/${file.name}`);
+      avatarRef.put(file).then((snapshot) => {
+        snapshot.ref.getDownloadURL().then((downloadURL) => {
+          setProfileData((prevData) => ({ ...prevData, avatar: downloadURL }));
+        });
+      });
+    } else {
+      return;
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // check username uniqueness before updating profile
-    const usernameUnique = await checkUsernameAvailability(profileData.username)
+    const usernameUnique = await checkUsernameAvailability(
+      profileData.username
+    );
     if (!usernameUnique) {
-      return alert("this username has already been taken")
+      return alert("this username has already been taken");
     }
     // update display name in auth table
-    await updateProfile(user, { displayName: username });
-    
+    await updateProfile(user, { displayName: profileData.username });
+
     // update user's name in users db
     await updateDoc(doc(db, "users", user.uid), profileData);
     router.push("/profile");
@@ -91,8 +103,8 @@ const Updateprofile = () => {
 
         <div className="flex gap-2 items-center p-4">
           <Image
-            src=""
-            alt=""
+            src={profileData.avatar}
+            alt="avatar"
             className=" bg-black rounded-full gradient-border border-4"
             width={100}
             height={100}
@@ -102,6 +114,13 @@ const Updateprofile = () => {
               {profileData.username}
             </h1>
             <p className="text-primary font-semibold">Add profile picture</p>
+            <input
+              type="file"
+              name=""
+              title="Add profile picture"
+              id=""
+              onClick={(e) => handleFilechage(e)}
+            />
           </div>
         </div>
 
@@ -168,7 +187,7 @@ const Updateprofile = () => {
             <Button
               className="bg-[#C015A4] text-white w-full md:w-1/2 lg:w-1/5 p-4 text-center border rounded-full "
               label="Save"
-              onClick={(e) => handleSubmit(e)}
+              // onClick={(e) => handleSubmit(e)}
             />
           </form>
         </div>

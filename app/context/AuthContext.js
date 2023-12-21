@@ -55,15 +55,16 @@ export const AuthContextProvider = ({ children }) => {
   //   return querySnapshot.empty;
   // };
 
-  const login = (email, password) => {
-    const user = setPersistence(auth, browserLocalPersistence)
-      .then(() => {
-        return signInWithEmailAndPassword(auth, email, password);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-    return user
+  const login = async (email, password) => {
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      console.log(user);
+      return user;
+    } catch (error) {
+      console.log(error.message);
+      return null; // Set user to null on error
+    }
   };
 
   const logout = () => {
@@ -137,4 +138,3 @@ export const AuthContextProvider = ({ children }) => {
 export const UserAuth = () => {
   return useContext(AuthContext);
 };
-

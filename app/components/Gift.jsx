@@ -1,9 +1,10 @@
-import { deleteDoc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "@/firebase/config";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const Gift = ({ id, name, image, bg = "moneybg", user }) => {
+const Gift = ({ id, name, image, bg = "moneybg", setGifts, user }) => {
   const [selectedGift, setselectedGift] = useState(false);
 
   const handleSelection = () => {
@@ -20,13 +21,6 @@ const Gift = ({ id, name, image, bg = "moneybg", user }) => {
     }
   };
 
-  useEffect(() => {
-    let userAvailable;
-    if (user) {
-      userAvailable = user.id;
-    }
-  }, [user]);
-
   return (
     <>
       <Link
@@ -40,7 +34,7 @@ const Gift = ({ id, name, image, bg = "moneybg", user }) => {
         onClick={handleSelection}
       >
         <Image
-          src="/images/image 9.png"
+          src={`${image ? image : "/images/image 9.png"}`}
           alt="gift-image"
           width={70}
           height={70}

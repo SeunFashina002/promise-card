@@ -41,7 +41,7 @@ const Addgift = () => {
           user: userId,
         });
         console.log("gift added");
-        router.push("/:id/addgift/giftadded");
+        router.push("/addgift/giftadded");
       } catch (error) {
         console.log("error adding gift", error);
       }

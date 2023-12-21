@@ -7,10 +7,13 @@ import { PiHandHeartBold } from "react-icons/pi";
 import { gifts } from "../../_data/data";
 import Button from "@/components/Button";
 import Navigation from "@/components/Navigation";
+import { useRouter } from "next/navigation";
 
 export const PromisePage = ({ user }) => {
+  const router = useRouter();
+
   function handleClick() {
-    router.push("/addgift");
+    router.push("/give");
   }
   return (
     <>

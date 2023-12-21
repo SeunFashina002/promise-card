@@ -62,15 +62,7 @@ export const Home = ({ user, username }) => {
           {user && gifts.length > 0 ? (
             <div className="grid grid-cols-2 p-4 gap-4">
               {gifts.map((gift) => (
-                <div>
-                  <Gift key={gift.id} {...gift} />
-                  <Button
-                    className="bg-[#C015A4] text-white  p-4 text-center border rounded-full absolute bottom-24"
-                    label="Add gift"
-                    onClick={handleClick}
-                  />
-                  <></>
-                </div>
+                <Gift key={gift.id} setGifts={setGifts} {...gift} />
               ))}
             </div>
           ) : (
