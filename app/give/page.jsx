@@ -1,16 +1,37 @@
 "use client";
 import Gift from "@/components/Gift";
+import { gifts } from "../../_data/data";
 import Link from "next/link";
 import Button from "@/components/Button";
-import { gifts } from "../../_data/data";
 import Image from "next/image";
 
+import { useState, useEffect } from "react";
+
 const Give = () => {
-  console.log(gifts);
+  const selectedGift = JSON.parse(localStorage.getItem("gifts")) || [];
+  const [addedStatus, setAddedStatus] = useState({});
+
+  useEffect(() => {
+    const storedAddedStatus =
+      JSON.parse(localStorage.getItem("addedStatus")) || {};
+    setAddedStatus(storedAddedStatus);
+  }, []);
+
+  const handleCancel = (giftId) => {
+    const updatedSelectedGifts = selectedGift.filter(
+      (gift) => gift.id !== giftId
+    );
+    localStorage.setItem("gifts", JSON.stringify(updatedSelectedGifts));
+
+    const newAddedStatus = { ...addedStatus, [giftId]: !addedStatus[giftId] };
+    localStorage.setItem("addedStatus", JSON.stringify(newAddedStatus));
+    setAddedStatus(newAddedStatus);
+  };
+
   return (
     <>
       <section className="md:w-2/4 p-4 mx-auto">
-        <div className="pb-4">
+        <div className="pb-14">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -30,29 +51,11 @@ const Give = () => {
         </div>
 
         <form>
-          <div className="mb-4">
-            <label htmlFor="" className="text-black text-xl font-semibold ">
-              Choose Gift item
-            </label>
-          </div>
-          <div className="grid grid-cols-2 gap-4 pb-8">
-            {gifts.map((gift) => (
-              <div key={gift.id} className={`${gift.bg} p-4 rounded-2xl`}>
-                <input type="checkbox" name="" id="" />
-                <div className="flex flex-col items-center">
-                  <Image src={gift.img} alt="gift" width={40} height={40} />
-                  <label htmlFor="" className="text-black">
-                    {gift.title}
-                  </label>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div>{}</div>
-          <div className="pb-8">
+          <div className="pb-14">
             <label htmlFor="" className="text-black text-xl font-semibold">
               Giver's Name
             </label>
+
             <div className="flex justify-between p-4 bg-[#F7F3F3] border rounded-2xl mt-2">
               <input
                 type="text"
@@ -82,7 +85,7 @@ const Give = () => {
               </svg>
             </div>
           </div>
-          <div className="pb-8">
+          <div className="pb-14">
             <label htmlFor="" className="text-black text-xl font-semibold">
               Date
             </label>
@@ -138,7 +141,77 @@ const Give = () => {
 
           <div className="pb-14">
             <label htmlFor="" className="text-black text-xl font-semibold">
-              If you choosed money, How much?
+              Promise
+            </label>
+
+            <div className="grid grid-cols-2 gap-4">
+              {selectedGift.map((gift) => (
+                <div
+                  key={gift.id}
+                  className="bg-green-300 flex flex-col items-center p-4 relative rounded-lg"
+                >
+                  <div
+                    className="bg-white rounded-full absolute right-4"
+                    onClick={() => handleCancel(gift.id)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M13.0601 12L15.3601 9.69998C15.6501 9.40998 15.6501 8.92999 15.3601 8.63999C15.0701 8.34999 14.5901 8.34999 14.3001 8.63999L12.0001 10.94L9.70011 8.63999C9.41011 8.34999 8.93011 8.34999 8.64011 8.63999C8.35011 8.92999 8.35011 9.40998 8.64011 9.69998L10.9401 12L8.64011 14.3C8.35011 14.59 8.35011 15.07 8.64011 15.36C8.79011 15.51 8.98011 15.58 9.17011 15.58C9.36011 15.58 9.55011 15.51 9.70011 15.36L12.0001 13.06L14.3001 15.36C14.4501 15.51 14.6401 15.58 14.8301 15.58C15.0201 15.58 15.2101 15.51 15.3601 15.36C15.6501 15.07 15.6501 14.59 15.3601 14.3L13.0601 12Z"
+                        fill="#292D32"
+                      />
+                    </svg>
+                  </div>
+                  <Image
+                    src={gift.img}
+                    alt={gift.title}
+                    width={50}
+                    height={50}
+                  />
+                  <h1 className="text-black">{gift.title}</h1>
+                </div>
+              ))}
+              <Link
+                href="/addgift"
+                className="text-black bg-[#EDEFEE] flex items-center justify-center flex-col rounded-lg"
+              >
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="65"
+                    height="64"
+                    viewBox="0 0 65 64"
+                    fill="none"
+                  >
+                    <path
+                      d="M16.5 32H48.5"
+                      stroke="#292D32"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M32.5 48V16"
+                      stroke="#292D32"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <p>add gift</p>
+              </Link>
+            </div>
+          </div>
+
+          <div className="pb-14">
+            <label htmlFor="" className="text-black text-xl font-semibold">
+              Giver's Name
             </label>
             <div className="flex gap-2  p-4 bg-[#F7F3F3] border rounded-lg mt-2">
               <select

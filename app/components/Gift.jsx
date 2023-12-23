@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const Gift = ({ id, name, image, bg = "moneybg", setGifts, user }) => {
+const Gift = ({ id, title, image, bg = "moneybg", setGifts, user }) => {
   const [selectedGift, setselectedGift] = useState(false);
 
   const handleSelection = () => {
@@ -41,7 +41,7 @@ const Gift = ({ id, name, image, bg = "moneybg", setGifts, user }) => {
           priority
         />
 
-        <h2 className=" text-black">{name}</h2>
+        <h2 className=" text-black">{title}</h2>
 
         {user ? (
           <div
