@@ -1,6 +1,6 @@
 "use client";
 import {Inter} from "next/font/google";
-// import "./globals.css";
+import "./globals.css";
 import {AuthContextProvider} from "@/context/AuthContext";
 // import GlobalState, {GiftProvider} from "./context/GiftContext";
 // import GiftContext from "./context/GiftContext";
