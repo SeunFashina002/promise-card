@@ -2,8 +2,8 @@
 import {Inter} from "next/font/google";
 import "./globals.css";
 import {AuthContextProvider} from "@/context/AuthContext";
-import GlobalState, {GiftProvider} from "./context/GiftContext";
-import GiftContext from "./context/GiftContext";
+// import GlobalState, {GiftProvider} from "./context/GiftContext";
+// import GiftContext from "./context/GiftContext";
 import {useState, createContext} from "react";
 
 const inter = Inter({subsets: ["latin"]});
