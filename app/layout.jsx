@@ -1,6 +1,6 @@
 "use client";
 import {Inter} from "next/font/google";
-import "./globals.css";
+// import "./globals.css";
 import {AuthContextProvider} from "@/context/AuthContext";
 // import GlobalState, {GiftProvider} from "./context/GiftContext";
 // import GiftContext from "./context/GiftContext";
@@ -17,9 +17,9 @@ export default function RootLayout({children}) {
 				<meta name="description" content="A digital promise card" />
 			</head>
 			<body className={inter.className}>
-				<GlobalState>
-					<AuthContextProvider>{children}</AuthContextProvider>
-				</GlobalState>
+				{/* <GlobalState> */}
+				<AuthContextProvider>{children}</AuthContextProvider>
+				{/* </GlobalState> */}
 			</body>
 		</html>
 	);
